@@ -22,11 +22,25 @@
     board.width = window.innerWidth;
     let tool = board.getContext('2d');
     tool.fillStyle='green';
-    tool.fillRect(10,10,board.width/2,board.height/2);
+    // tool.fillRect(10,10,board.width/2,board.height/2);
     tool.fillStyle='red';
     // tool.fillRect(40,40,board.width/2,board.height/2);
-    tool.strokeStyle = 'yellow';
+    // tool.strokeStyle = 'yellow';
     tool.lineWidth = 10;
-    tool.strokeRect(80,80,board.width/2,board.height/2);
+    // tool.strokeRect(80,80,board.width/2,board.height/2);
+
+    tool.beginPath();
+    tool.moveTo(20,20);
+    // tool.strokeStyle = 'purple';
+    tool.lineTo(50,50);
+    tool.stroke();
+
+    tool.beginPath();
+    tool.moveTo(150,150);
+    tool.strokeStyle = 'yellow';
+    tool.lineTo(100,100);
+    tool.stroke();
+
+
 </script>
 </html>
