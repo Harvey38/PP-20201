@@ -1,0 +1,26 @@
+*{
+    box-sizing: border-box;
+}
+.parent
+{
+    height: 5rem;
+    width: 60vw;
+    display: flex;
+    margin: 0 auto;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.color{
+    height: 70%;
+    width: 30%;
+    background-color: red;
+}
+.red{
+    background-color: red;
+}
+.blue{
+    background-color: blue;
+}
+.green{
+    background-color: green;
+}
