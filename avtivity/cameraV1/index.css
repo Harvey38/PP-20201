@@ -87,3 +87,7 @@ video{
     }
     
 }
+#record-video,#click-picture,.filter-container
+{
+    z-index: 5;
+}

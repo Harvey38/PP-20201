@@ -5,6 +5,42 @@ let captureBtn = document.querySelector('#click-picture');
 let mediaRecorder;
 let recordState = false;
 let chunks = [];
+
+let filter = '';
+
+let allFilters = document.querySelectorAll('.filter');
+for(let i=0;i<allFilters.length;i++)
+{
+    allFilters[i].addEventListener('click',function(e){
+        filter = e.currentTarget.style.backgroundColor;
+        removeFilter();
+        addFilterToScreen(filter);
+    })
+}
+
+function addFilterToScreen(filterColor)
+{
+    let filter = document.createElement('div');
+    filter.classList.add('on-screen-filter');
+    filter.style.height='100vh';
+    filter.style.width='100vw';
+    filter.style.backgroundColor=`${filterColor}`;
+    filter.style.position = 'fixed';
+    filter.style.top= '0px';
+    document.querySelector('body').appendChild(filter);
+}
+function removeFilter(){
+    let el = document.querySelector('.on-screen-filter');
+    if(el)
+    {
+        el.remove();
+    }
+}
+
+
+
+
+
 vidRecordBtn.addEventListener("click",function(){
     if(mediaRecorder!=undefined)
     {
