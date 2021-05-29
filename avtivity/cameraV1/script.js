@@ -12,12 +12,11 @@ vidRecordBtn.addEventListener("click",function(){
     {
         recordState=true;
         mediaRecorder.start();
-        vidRecordBtn.innerText = 'Recording...'
     }
     else{
         recordState=false;
         mediaRecorder.stop();
-        vidRecordBtn.innerText = 'Record';
+        
     }
 }
 })
