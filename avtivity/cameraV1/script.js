@@ -7,6 +7,35 @@ let recordState = false;
 let chunks = [];
 
 let filter = '';
+let currZoom =1;
+let zoomInBtn = document.getElementById('in');
+let zoomOutBtn = document.getElementById('out');
+
+zoomInBtn.addEventListener('click',function(){
+    console.log(videoPlayer.style.transform);
+    let vidScale = Number(
+        videoPlayer.style.transform.split("(")[1].split(")")[0]
+    )
+    if(vidScale<3)
+    {
+        currZoom = vidScale+0.1;
+        videoPlayer.style.transform=`scale(${currZoom})`;
+    }
+});
+
+zoomOutBtn.addEventListener('click',function(){
+    console.log(videoPlayer.style.transform);
+    let vidScale = Number(
+        videoPlayer.style.transform.split("(")[1].split(")")[0]
+    )
+    if(vidScale>1)
+    {
+        currZoom = vidScale-0.1;
+        videoPlayer.style.transform=`scale(${currZoom})`;
+    }
+});
+
+
 
 let allFilters = document.querySelectorAll('.filter');
 for(let i=0;i<allFilters.length;i++)
@@ -44,11 +73,14 @@ function removeFilter(){
 vidRecordBtn.addEventListener("click",function(){
     if(mediaRecorder!=undefined)
     {
+        removeFilter();
         let innerDiv = vidRecordBtn.querySelector('#record-div');
     if(recordState==false)
     {
         recordState=true;
         innerDiv.classList.add('recording-animation');
+        currZoom=1
+        videoPlayer.style.transform = `scale(${currZoom})`
         mediaRecorder.start();
     }
     else{
@@ -86,19 +118,30 @@ captureBtn.addEventListener('click',function()
     let innerDiv = captureBtn.querySelector('#click-div');
     innerDiv.classList.add('capture-animation');
     console.log(('clicked'));
-    capture();
+    capture(filter);
 
     setTimeout(function(){
         innerDiv.classList.remove('capture-animation');
     },1000);
 })
-function capture()
+function capture(filter)
 {
     let c = document.createElement('canvas');
     c.width = videoPlayer.videoWidth;
     c.height = videoPlayer.videoHeight;
     let tool = c.getContext('2d');
+    //origin shifting
+    tool.translate(c.width/2,c.height/2);
+    //scaling
+    tool.scale(currZoom,currZoom);
+    //moving back the origin
+    tool.translate(-c.width/2,-c.height/2);
     tool.drawImage(videoPlayer,0,0);
+    if(filter!='')
+    {
+        tool.fillStyle = filter;
+        tool.fillRect(0,0,c.width,c.height);
+    }
     let link = document.createElement('a');
     link.download = 'image.png';
     link.href = c.toDataURL();
