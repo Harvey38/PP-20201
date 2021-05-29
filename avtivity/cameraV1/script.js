@@ -8,13 +8,16 @@ let chunks = [];
 vidRecordBtn.addEventListener("click",function(){
     if(mediaRecorder!=undefined)
     {
+        let innerDiv = vidRecordBtn.querySelector('#record-div');
     if(recordState==false)
     {
         recordState=true;
+        innerDiv.classList.add('recording-animation');
         mediaRecorder.start();
     }
     else{
         recordState=false;
+        innerDiv.classList.remove('recording-animation');
         mediaRecorder.stop();
         
     }
@@ -44,8 +47,14 @@ navigator.mediaDevices.getUserMedia(constraints).then(function(mediaStream){
 })
 captureBtn.addEventListener('click',function()
 {
+    let innerDiv = captureBtn.querySelector('#click-div');
+    innerDiv.classList.add('capture-animation');
     console.log(('clicked'));
     capture();
+
+    setTimeout(function(){
+        innerDiv.classList.remove('capture-animation');
+    },1000);
 })
 function capture()
 {

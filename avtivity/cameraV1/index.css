@@ -69,3 +69,21 @@ video{
     height: 60vh;
     width: 5.5vw;
 }
+.recording-animation{
+    animation: shrinkInOut 0.8s infinite;
+}
+.capture-animation{
+    animation: shrinkInOut 1s;
+}
+@keyframes shrinkInOut {
+    0%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(1.2);
+    }
+    100%{
+        transform: scale(1);
+    }
+    
+}
