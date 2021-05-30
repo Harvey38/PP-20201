@@ -42,6 +42,7 @@ function viewMedia()
                 let deleteBtn = document.createElement('button');
                 deleteBtn.classList.add('gallery-delete-button');
                 deleteBtn.innerText='Delete';
+                deleteBtn.addEventListener('click',deleteBtnHandler);
                 let downloadBtn = document.createElement('button');
                 downloadBtn.classList.add('gallery-download-button');
                 downloadBtn.innerText='Download';
@@ -64,6 +65,7 @@ function viewMedia()
                 let deleteBtn = document.createElement('button');
                 deleteBtn.classList.add('gallery-delete-button');
                 deleteBtn.innerText='Delete';
+                deleteBtn.addEventListener('click',deleteBtnHandler);
                 let downloadBtn = document.createElement('button');
                 downloadBtn.classList.add('gallery-download-button');
                 downloadBtn.innerText='Download';
@@ -76,4 +78,17 @@ function viewMedia()
         }
     }
     
+}
+
+function deleteMediaFromGallery(mId)
+{
+    let tx = db.transaction('gallery','readwrite');
+    let gallery = tx.objectStore('gallery');
+    gallery.delete(Number(mId));
+}
+function deleteBtnHandler(e)
+{
+    let mId = e.currentTarget.parentNode.getAttribute('data-mId');
+    deleteMediaFromGallery(mId);
+    e.currentTarget.parentNode.remove();
 }
