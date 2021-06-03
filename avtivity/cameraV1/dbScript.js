@@ -46,6 +46,7 @@ function viewMedia()
                 let downloadBtn = document.createElement('button');
                 downloadBtn.classList.add('gallery-download-button');
                 downloadBtn.innerText='Download';
+                downloadBtn.addEventListener('click',downloadBtnHandler);
                 vidContainer.appendChild(deleteBtn);
                 vidContainer.appendChild(downloadBtn);
                 video.controls=true;
@@ -69,6 +70,7 @@ function viewMedia()
                 let downloadBtn = document.createElement('button');
                 downloadBtn.classList.add('gallery-download-button');
                 downloadBtn.innerText='Download';
+                downloadBtn.addEventListener('click',downloadBtnHandler);
                 imgContainer.appendChild(deleteBtn);
                 imgContainer.appendChild(downloadBtn);
                 body.appendChild(imgContainer);
@@ -91,4 +93,20 @@ function deleteBtnHandler(e)
     let mId = e.currentTarget.parentNode.getAttribute('data-mId');
     deleteMediaFromGallery(mId);
     e.currentTarget.parentNode.remove();
+}
+
+function downloadBtnHandler(e)
+{
+    let a = document.createElement('a');
+    a.href = e.currentTarget.parentNode.children[0].src;
+    if(e.currentTarget.parentNode.children[0].nodeName=='IMG')
+    {
+        a.download = 'image.png';
+    }
+    else
+    {
+        a.download = 'video.mp4';
+    }
+    a.click();
+    a.remove();
 }
