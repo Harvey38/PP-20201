@@ -24,8 +24,18 @@ let introduction =['Hello','I','am','Tushar'];
 // console.log(pronoun)
 // console.log(name);;
 
-let a =3;
-let b =6;
-[a,b]=[b,a];
-console.log(a);
-console.log(b);
+// let a =3;
+// let b =6;
+// [a,b]=[b,a];
+// console.log(a);
+// console.log(b);
+
+let arr = [1,2,3,4,5,6,7,8,9,10,11];
+let [fv,sv,tv,...narr]=arr;
+// console.log(fv);
+// console.log(sv);
+// console.log(tv);
+// console.log(narr);
+narr[0] = 40;
+console.log(narr);
+console.log(arr);
