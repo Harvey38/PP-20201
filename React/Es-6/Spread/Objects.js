@@ -29,7 +29,8 @@ const state = {
 // console.log(state);
 // console.log(copy);
 
-let copy ={...state,address:{...state.address,country:{...state.address.country}}};
+let copy ={...state,address:{...state.address,
+    country:{...state.address.country}}};
 
 // copy.address.city='Delhi';
 
