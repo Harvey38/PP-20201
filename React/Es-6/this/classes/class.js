@@ -1,9 +1,57 @@
+class abc{
+    constructor(name,age)
+    {
+        this.name=name;
+        this.age=age
+        this.sayHello = this.sayHi.bind(this)
+    }
+
+    sayHi()
+    {
+        console.log('Hello');
+        console.log(this);
+        console.log(this.name);
+    }
+
+}
+
+let obj = new abc('Tushar',22);
+console.log(obj);
+obj.sayHello();
+let btn = document.querySelector('button');
+btn.addEventListener('click',obj.sayHello);
+
+//////////////////////////////////Arrow Function
+
+
 // class abc{
 //     constructor(name,age)
 //     {
 //         this.name=name;
 //         this.age=age
-//         this.sayHi = this.sayHi.bind(this)
+//     }
+//     sayHi=()=>
+//     {
+//         console.log('Hello');
+//         console.log(this);
+//         console.log(this.name);
+//     }
+// }
+
+// let obj = new abc('Tushar',22);
+// console.log(obj);
+// obj.sayHi();
+// let btn = document.querySelector('button');
+// btn.addEventListener('click',obj.sayHi);
+
+///////////////////////////////////////////////////////////////
+
+
+// class abc{
+//     constructor(name,age)
+//     {
+//         this.name=name;
+//         this.age=age
 //     }
 
 //     sayHi()
@@ -17,30 +65,7 @@
 
 // let obj = new abc('Tushar',22);
 // console.log(obj);
-// obj.sayHi();
-// let btn = document.querySelector('button');
-// btn.addEventListener('click',obj.sayHi);
+// // let ret = obj.sayHi;
+// // ret();
 
-//////////////////////////////////Arrow Function
-
-
-class abc{
-    constructor(name,age)
-    {
-        this.name=name;
-        this.age=age
-    }
-    sayHi=()=>
-    {
-        console.log('Hello');
-        console.log(this);
-        console.log(this.name);
-    }
-}
-
-let obj = new abc('Tushar',22);
-console.log(obj);
-obj.sayHi();
-let btn = document.querySelector('button');
-btn.addEventListener('click',obj.sayHi);
-
+// setTimeout(obj.sayHi,1000);
