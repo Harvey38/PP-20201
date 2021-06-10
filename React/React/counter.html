@@ -16,8 +16,8 @@
 
 
 class Counter extends React.Component{
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state={
             count:0
         }
@@ -27,17 +27,31 @@ class Counter extends React.Component{
       this.setState({count:this.state.count+1});
     //    this.state.count = this.state.count+1;
      }
+     decrement =()=>{
+         this.setState({count:this.state.count-1})
+     }
      
      render()
     {
+        console.log('render');
         return(
             <React.Fragment>
                 <h1>{this.state.count}</h1>
                 <button onClick={this.increment}>+</button>
+                <button onClick={this.decrement}>-</button>
                 </React.Fragment>
         )
     }
 }
-ReactDOM.render(<Counter/>,document.getElementById('root'));
+function Counters(props)
+{
+    return(
+        <React.Fragment>
+            <Counter/>
+            <Counter/>
+        </React.Fragment>
+    )
+}
+ReactDOM.render(<Counters/>,document.getElementById('root'));
 </script>
 </html>
