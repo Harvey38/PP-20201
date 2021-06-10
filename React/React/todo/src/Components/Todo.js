@@ -17,9 +17,7 @@ export default class Todo extends Component {
         this.setState({currTask:cval});
     }
     handleClick=()=>{
-        // console.log(this.state.currTask);
-        // this.state.tasks.push({id:this.state.tasks.length+1,txt:this.state.currTask});
-        // this.state.currTask='';
+       
         let nta = [...this.state.tasks,
             {id:this.state.tasks.length+1,txt:this.state.currTask}];
         this.setState({
@@ -40,26 +38,57 @@ export default class Todo extends Component {
     render() {
 
         return (
-            <div>
-             <div className='input-container'>
-                 <input onChange={this.handleChange} 
-                 value={this.state.currTask} type='text'></input>
-                 <button onClick={this.handleClick}>Add</button>
-            </div>
+            <>
+            <InputComponent currTask={this.state.currTask}
+ handleChange={this.handleChange} handleClick={this.handleClick} />
+            <TaskList tasks={this.state.tasks} 
+            onDelete={this.onDelete} />
+            </>
+        )
+    }
+}
+
+
+
+class InputComponent extends Component {
+    constructor(props)
+    {
+        super(props);
+    }
+    render() {
+        return (
+            <div className='input-container'>
+            <input  type='text' value={this.props.currTask}
+             onChange={this.props.handleChange} ></input>
+            <button onClick={this.props.handleClick} >
+                Add</button>
+       </div>
+        )
+    }
+}
+class TaskList extends Component {
+    constructor(props)
+    {
+        super(props);
+    }
+    render() {
+        return (
             <div className='class-list'>
                 <ul>
-                    {
-                        
-                        this.state.tasks.map(task=>(
+                    { 
+                        this.props.tasks.map(task=>(
                             <li key={task.id}>
                                 <h1>{task.txt}</h1>
-                                <button onClick={()=>this.onDelete(task.id)}>Delete</button>
+                                <button 
+  onClick={()=>this.props.onDelete(task.id)} >Delete</button>
                             </li>
         ))
                     }
                 </ul>    
-            </div>          
-            </div>
+            </div>      
         )
     }
 }
+
+
+
