@@ -58,11 +58,14 @@ class InputComponent extends Component {
             <div className='input-container'>
             <input  type='text' value={this.state.currTask}
              onChange={this.handleChange} ></input>
+             {
+                 this.state.currTask ?
             <button onClick={()=>{
                 this.props.handleClick(this.state.currTask);
                 this.setState({currTask:''})
             }} >
-                Add</button>
+                Add</button>:<></>
+    }
        </div>
         )
     }
