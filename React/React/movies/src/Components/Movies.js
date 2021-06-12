@@ -16,30 +16,12 @@ export default class Movies extends Component {
         this.setState({
             movies:filterMovies
         })
-    }
-     
+    }   
     handleChange=(e)=>{
 
 
        let task = e.target.value;
        this.setState({currSearchText:task});
-    //    if(task=='')
-    //    {
-    //        this.setState({
-    //            filterMovies:this.state.movies,
-    //            currSearchText:''
-    //        })
-    //        return;
-    //    }
-    //    let filteredArr = this.state.movies.filter(movieObj=>{
-    //        let title = movieObj.title.trim().toLowerCase();
-         
-    //        return title.includes(task.toLowerCase())
-    //    })
-    //    this.setState({
-    //        filterMovies:filteredArr,
-    //        currSearchText:task
-    //    })
     }
 
     render() {
@@ -69,8 +51,19 @@ export default class Movies extends Component {
       <th scope="col">#</th>
       <th scope="col">Title</th>
       <th scope="col">Genre</th>
-      <th scope="col">Stock</th>
-      <th scope="col">Rate</th>
+
+      <th scope="col">
+      <i className="fas fa-sort-up"></i>
+          Stock
+          <i className="fa fa-sort-down"></i>
+    </th>
+
+      <th scope="col">
+      <i className="fas fa-sort-up"></i>
+          Rate
+          <i className="fa fa-sort-down"></i>
+          </th>
+
     </tr>
   </thead>
   <tbody>
@@ -88,7 +81,8 @@ export default class Movies extends Component {
           }
   </tbody>
 </table>    
-                  
+
+
               </div>  
             </div>
               
