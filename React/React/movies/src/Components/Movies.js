@@ -15,9 +15,9 @@ export default class Movies extends Component {
         console.log('Component DID Mount');
         let promise = axios.get('https://backend-react-movie.herokuapp.com/movies');
         let data = await promise;
-    //     this.setState({
-    //         movies:data.data.movies
-    //     })
+        this.setState({
+            movies:data.data.movies
+        })
     }
     onDelete = (id) => {
         let filterMovies = this.state.movies.filter(movieObj => {
