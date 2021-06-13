@@ -1,14 +1,23 @@
 import React, { Component } from 'react'
-import { getMovies } from './getMovies'
+import { getMovies } from './getMovies';
+import axios from 'axios'
 export default class Movies extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            movies: getMovies(),
+            movies: [],
             currSearchText: '',
             currPage: 1,
             limit: 4
         }
+    }
+    async componentDidMount(){
+        console.log('Component DID Mount');
+        let promise = axios.get('https://backend-react-movie.herokuapp.com/movies');
+        let data = await promise;
+        this.setState({
+            movies:data.data.movies
+        })
     }
     onDelete = (id) => {
         let filterMovies = this.state.movies.filter(movieObj => {
@@ -26,7 +35,7 @@ export default class Movies extends Component {
     }
     sortByRatings = (e) => {
         let className = e.target.className;
-        console.log(className);
+        // console.log(className);
         let sortedArr = [];
         if (className == 'fas fa-sort-up') {
             //ascending order m sort
@@ -48,13 +57,20 @@ export default class Movies extends Component {
     sortByStock = (e) => {
         let className = e.target.className;
         let sortedArr = [];
+        //We have applied the same click event on both the arrows of the stock column
+        // so we have to identify whether we have to sort in descending or ascending order.
+        //  for this we have used the class Names as a condition
         if (className == 'fas fa-sort-up') {
+            // We need to provide JS with how to compare the two elements when we are trying to sort an array of derived data-types
+            // such as objects.
+            // a-b is used for sorting in ascending order
             sortedArr = this.state.movies.sort((movieA, movieB) => {
                 return movieA.numberInStock - movieB.numberInStock;
             })
         }
         else {
             sortedArr = this.state.movies.sort((movieA, movieB) => {
+                // b-a is used for sorting in descending order.
                 return movieB.numberInStock - movieA.numberInStock;
             })
         }
@@ -71,9 +87,10 @@ export default class Movies extends Component {
     }
 
     render() {
+        console.log('render');
         let { movies, currSearchText, limit, currPage } = this.state;
         let filterMovies = [];
-
+// searching
         if (currSearchText != '') {
             filterMovies = movies.filter(movieObj => {
                 let title = movieObj.title.trim().toLowerCase();
@@ -84,6 +101,8 @@ export default class Movies extends Component {
         else {
             filterMovies = movies;
         }
+        ////////////////////////
+//Pagination & limit
         let numberofPages =Math.ceil(filterMovies.length/limit);
         let pageNumberArr =[];
         for(let i=0;i<numberofPages;i++)
@@ -93,7 +112,7 @@ export default class Movies extends Component {
         let si = (currPage - 1) * limit;
         let ei = si + limit;
         filterMovies = filterMovies.slice(si, ei);
-
+/////////////////////////////
         return (
             <div className='container'>
                 <div className='row'>
@@ -103,6 +122,9 @@ export default class Movies extends Component {
                     <div className='col-9'>
                         <input value={this.state.currSearchText} onChange={this.handleChange} type='text'></input>
                         <input value={this.state.limit > filterMovies.length ? filterMovies.length : this.state.limit}
+                        // suppose we limit of 4 and we type th we have only 2 movies of type th ....
+                        // this would lead to a bug where we ony have 2 movies in filter Array but in input tag we have 4 as our default limit
+
                             onChange={this.handleLimit} min='1' max={movies.length} type='number'></input>
                         <table className="table">
                             <thead>
@@ -141,7 +163,7 @@ export default class Movies extends Component {
                             </tbody>
                         </table>
                         <nav aria-label="...">
-                            <ul class="pagination">
+                            <ul className="pagination">
 
                                 {/* <li class="page-item"><a class="page-link" href="#">1</a></li>
                                 <li class="page-item active" aria-current="page">
@@ -152,9 +174,11 @@ export default class Movies extends Component {
                                 {
                                     pageNumberArr.map(pageNumber=>{
                                         let classStyleName = pageNumber==currPage? 'page-item active' : 'page-item'
+                                        // the above let variable is used to define the class too be put on the li element.
+                                        //  As this decides the blue backgroound.
                                         return(
                                             <li onClick={()=>this.handlePageChange(pageNumber)} className={classStyleName} key={pageNumber} >
-                                                <span class="page-link">{pageNumber}</span>
+                                                <span className="page-link">{pageNumber}</span>
                                             </li>
                                         )
                                     })
