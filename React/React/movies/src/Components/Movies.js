@@ -15,9 +15,9 @@ export default class Movies extends Component {
         console.log('Component DID Mount');
         let promise = axios.get('https://backend-react-movie.herokuapp.com/movies');
         let data = await promise;
-        this.setState({
-            movies:data.data.movies
-        })
+    //     this.setState({
+    //         movies:data.data.movies
+    //     })
     }
     onDelete = (id) => {
         let filterMovies = this.state.movies.filter(movieObj => {
@@ -114,6 +114,13 @@ export default class Movies extends Component {
         filterMovies = filterMovies.slice(si, ei);
 /////////////////////////////
         return (
+            <>
+            {
+                this.state.movies.length==0?
+                <div className="spinner-border text-primary" role="status">
+  <span className="sr-only">Loading...</span>
+</div>
+            :
             <div className='container'>
                 <div className='row'>
                     <div className='col-3'>
@@ -188,7 +195,8 @@ export default class Movies extends Component {
                     </div>
                 </div>
             </div>
-
+    }
+</>
         )
     }
 }
