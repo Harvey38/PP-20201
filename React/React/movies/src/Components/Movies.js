@@ -23,6 +23,29 @@ export default class Movies extends Component {
        let task = e.target.value;
        this.setState({currSearchText:task});
     }
+    sortByRatings = (e)=>{
+        let className = e.target.className;
+        console.log(className);
+        let sortedArr =[];
+        if(className=='fas fa-sort-up')
+        {
+            //ascending order m sort
+            sortedArr = this.state.movies.sort((movieA,movieB)=>{
+                return movieA.dailyRentalRate-movieB.dailyRentalRate
+            });
+        }
+        else
+        {
+            //descending order
+            sortedArr = this.state.movies.sort((movieA,movieB)=>{
+                return movieB.dailyRentalRate-movieA.dailyRentalRate
+            })
+        }
+        this.setState({
+            movies:sortedArr
+        });
+
+    }
 
     render() {
         let {movies,currSearchText} = this.state;
@@ -59,9 +82,9 @@ export default class Movies extends Component {
     </th>
 
       <th scope="col">
-      <i className="fas fa-sort-up"></i>
+      <i className="fas fa-sort-up" onClick={this.sortByRatings} ></i>
           Rate
-          <i className="fa fa-sort-down"></i>
+          <i className="fa fa-sort-down" onClick={this.sortByRatings} ></i>
           </th>
 
     </tr>
