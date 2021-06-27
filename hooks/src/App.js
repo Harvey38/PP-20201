@@ -3,6 +3,7 @@ import Uswo from "./useState/Uswo";
 import Ue2 from "./useEffect/Ue2";
 import Ue3 from "./useEffect/Ue3";
 import Infinite from "./useEffect/Infinite";
+import Uec1 from "./useEffect/UseEffect_Clean_up/Uec1";
 function App() {
   return (
     <>
@@ -10,7 +11,8 @@ function App() {
     {/* <Ue1/> */}
 {/* <Ue2/> */}
     {/* <Infinite/> */}
-    <Ue3/>
+    {/* <Ue3/> */}
+    <Uec1/>
     </>
   );
 }
